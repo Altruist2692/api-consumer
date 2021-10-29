@@ -1,0 +1,8 @@
+<br>
+<br>
+
+<% @posts.each do |post| %>
+  Title: <%= post['attributes']['title'] %>
+  Content: <%= post['attributes']['content'] %>
+  <br>
+<% end %>
