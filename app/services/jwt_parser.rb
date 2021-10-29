@@ -2,7 +2,7 @@ require 'monitor'
 
 class JwtParser
   ALGORITHM = 'RS256'.freeze
-  JWT_PUBLIC_KEY = "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAllEa6vln6m7wmfoEK6YO\n4bS3mWwQw+007fxRxxaU4ocowPljBhOMgaeOWgEJpgKxFBh3Dyul20oeF9Swvyw6\n00jko6UiGS9YCb8JiWOACXrv+I0bQcRJYnJch/l+ZS2kDLZzu2f2YKJkZdLlIUqt\neuKRGa03N1UNXjPK3rlrNdCvSRHZ+o3SCcLQL/Cvd2+tZFlrLCcVGpZZwBL2Nh4O\nPgvSQKlqOQ71dnXfl2uZK7dxIhXhzc1zb51K/vfgRIClszaeh8Hhn3e22m8CODCB\ngB1har6Ei3NS81FOiMiNEyLoAekq9q7dr7glMoGD/U3XWR2Gn8kRu/WlA/Hdg4p9\nQwIDAQAB\n-----END PUBLIC KEY-----"
+  JWT_PUBLIC_KEY = ENV['JWT_PUBLIC_KEY']
 
   # rubocop:disable Metrics/AbcSize
   def decode(jwt_string)
