@@ -1,9 +1,11 @@
 class Users::RefreshToken
   GRANT_TYPE = 'refresh_token'
   BASE_URL = 'http://localhost:3000'
+  
+  attr_accessor :user
 
   def initialize(options = {})
-    @user = user
+    @user = options[:user]
   end
 
   def call
@@ -21,5 +23,10 @@ class Users::RefreshToken
     response = http.request(req)
     data = JSON.parse response.read_body
     JwtParser.new.decode(data["access_token"])
+    user.update(access_token: data['access_token'],
+      refresh_token: data['refresh_token']  
+    ) 
+    user.reload
     data
+  end
 end

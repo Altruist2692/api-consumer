@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Content</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each_with_index do |post, index| %>
+      <tr>
+        <th scope="row"> <%= index + 1 %> </th>
+        <td><%= post['attributes']['title'] %></td>
+        <td><%= post['attributes']['content'] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

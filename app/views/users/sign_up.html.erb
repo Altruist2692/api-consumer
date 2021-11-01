@@ -1,0 +1,19 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <%= image_tag "incluude_dark.png" , alt: "Incluude Icon", style: 'width:50%;margin:15px' %>
+    </div>
+
+    <!-- Login Form -->
+    <%= form_with method: :post, url: users_sign_up_path do %>
+      <%= render partial: 'layouts/message' %>
+      <%= text_field_tag :email, nil, class: 'fadeIn second', placeholder: 'login', id: 'login' %>
+      <%= password_field_tag  :password, nil, class: 'fadeIn third', placeholder: 'password' %>
+      <%= submit_tag 'Sign up', class: 'fadeIn fourth' %>
+    <% end %>
+    <%= link_to "Click here to Log in", users_sign_in_path, class: 'signup'%>
+  </div>
+</div>

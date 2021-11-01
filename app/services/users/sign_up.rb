@@ -29,11 +29,23 @@ class Users::SignUp
     response = http.request(request)
     data = JSON.parse(response.read_body)
     user_data = data['user']
-    user = User.find_or_create({
-                          email: user_data['email'],
-                          access_token: user_data['access_token'],
-                          refresh_token: user_data['refresh_token']
-                        })
-    Thread.current[:current_user] = user
+    if data['error'].present?
+      {
+        error: data['error'].join(', '),
+        message: data['error_description']
+      }
+    else
+      decoded_jwt = JwtParser.new.decode(user_data['access_token'])
+      if decoded_jwt
+        user = User.find_or_create_by({
+          email: user_data['email'],
+          access_token: user_data['access_token'],
+          refresh_token: user_data['refresh_token'],
+          resource_reference_id: decoded_jwt['sub']
+        })
+        data[:user] = user
+      end
+      data
+    end
   end
 end

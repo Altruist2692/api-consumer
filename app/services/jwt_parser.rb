@@ -2,7 +2,7 @@ require 'monitor'
 
 class JwtParser
   ALGORITHM = 'RS256'.freeze
-  JWT_PUBLIC_KEY = ENV['JWT_PUBLIC_KEY']
+  JWT_PUBLIC_KEY = Rails.application.credentials.send(Rails.env.to_sym)[:jwt_public_key]
 
   # rubocop:disable Metrics/AbcSize
   def decode(jwt_string)
